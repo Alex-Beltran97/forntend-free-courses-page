@@ -7,7 +7,7 @@ import {
   Button,
 } from "@mui/material";
 import { Formik, Form } from "formik";
-import { typeField } from "../../models/enums";
+import { registerField } from '../../models/forms';
 
 type InitialValues = {
   document: number | string;
@@ -39,69 +39,27 @@ const FormRegister = () => {
           resetForm();
         }}
       >
-        {({ values, handleChange, handleSubmit }) => (
+        {({ values, handleChange, handleSubmit, errors }) => (
           <Form onSubmit={handleSubmit}>
             <Stack gap={2} paddingX={8} maxWidth={580}>
-              <TextField
-                required
-                type="number"
-                id="standard-required"
-                label="Documento"
-                variant="standard"
-                name="document"
-                value={values.document}
-                onChange={handleChange}
-              />
-              <TextField
-                required
-                type="text"
-                id="standard-required"
-                label="Contraseña"
-                variant="standard"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-              />
-              <TextField
-                required
-                type="text"
-                id="standard-required"
-                label="Nombre"
-                variant="standard"
-                name="name"
-                value={values.name}
-                onChange={handleChange}
-              />
-              <TextField
-                required
-                type="text"
-                id="standard-required"
-                label="Apellido"
-                variant="standard"
-                name="lastName"
-                value={values.lastName}
-                onChange={handleChange}
-              />
-              <TextField
-                required
-                type="number"
-                id="standard-required"
-                label="Telefono"
-                variant="standard"
-                name="phone"
-                value={values.phone}
-                onChange={handleChange}
-              />
-              <TextField
-                required
-                type="email"
-                id="standard-required"
-                label="Email"
-                variant="standard"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-              />
+
+            { registerField.map( ({ type, label, name }, index) : JSX.Element =>{
+
+              console.log(errors);
+
+              return (<TextField
+                  key={ index }
+                  required
+                  type={ type }
+                  id="standard-required"
+                  label={ label }
+                  variant="standard"
+                  name={ name }
+                  value={values.name }
+                  onChange={handleChange}
+                />)
+            }
+            ) }
               <FormGroup onChange={handleChange}>
                 <FormControlLabel
                   control={<Checkbox name="acceptedNews" />}

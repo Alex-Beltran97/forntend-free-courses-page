@@ -1,7 +1,14 @@
 import { Stack, Typography, Link } from '@mui/material';
+import { useEffect } from 'react';
 import FormRegister from "../components/Register/FormRegister";
+import { TITLE_TAB } from '../helpers/constants';
 
 const Register = () => {
+
+  useEffect(() => {
+    document.title = "Register" + TITLE_TAB;
+  }, []);
+
   return (<>
     <Stack alignItems="center" gap={ 4 } marginY={ 4 }>
       <h4>Regístrate y comienza a aprender</h4>
